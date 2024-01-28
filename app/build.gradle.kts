@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "br.com.ricardofrancosouza.learningkoltinnativeapplication"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.ricardofrancosouza.learningkoltinnativeapplication"
-        minSdk = 33
+        minSdk = 28
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
