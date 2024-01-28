@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "br.com.dominando.android.basico"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.dominando.android.basico"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
