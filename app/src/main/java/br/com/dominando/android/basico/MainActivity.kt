@@ -1,30 +1,26 @@
 package br.com.dominando.android.basico
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.dominando.android.basico.ui.theme.BasicoTheme
+import br.com.ricardofrancosouza.learningkoltinnativeapplication.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            BasicoTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+        setContentView(R.layout.activity_main)
+        val editText = findViewById<EditText>(R.id.editTexto)
+        val button = findViewById<Button>(R.id.buttonToast)
+        button.setOnClickListener {
+            val text = editText.text.toString()
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
         }
     }
 }
