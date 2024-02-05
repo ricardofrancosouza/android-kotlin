@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "br.com.dominando.android.layouts"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.dominando.android.layouts"
