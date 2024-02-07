@@ -19,7 +19,7 @@ import br.com.dominando.android.layouts.ui.theme.LayoutsTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ex_realtive)
+        setContentView(R.layout.ex_linear)
     }
 }
 
