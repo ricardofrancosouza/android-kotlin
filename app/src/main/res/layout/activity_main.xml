@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="br.com.dominando.android.basico.MainActivity"
+    android:theme="@style/Theme.AppCompat"
+    >
 
     <EditText
         android:id="@+id/editTexto"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="Name" />
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/buttonToast"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_button_toast" />
-</LinearLayout>
+        android:text="@string/main_button_toast"
+        app:layout_constraintStart_toStartOf="@id/editTexto"
+        app:layout_constraintTop_toBottomOf="@id/editTexto"/>
+    <Button
+        android:id="@+id/buttonTela2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_button_tela2"
+        app:layout_constraintStart_toStartOf="@+id/buttonToast"
+        app:layout_constraintTop_toBottomOf="@+id/buttonToast"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

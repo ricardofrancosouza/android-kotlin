@@ -1,5 +1,6 @@
 package br.com.dominando.android.basico
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -23,8 +24,18 @@ class MainActivity : ComponentActivity() {
                 Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
             }
         }
+        val buttonTelaClick = View.OnClickListener {
+            it.setOnClickListener {
+                val intent = Intent(this, Tela2Activity::class.java)
+                intent.putExtra("nome", "Glauber")
+                intent.putExtra("idade", 35)
+                startActivity(intent)
+            }
+        }
         val button = findViewById<Button>(R.id.buttonToast)
         button.setOnClickListener(buttonClick)
+        val buttonTela2 = findViewById<Button>(R.id.buttonTela2)
+        buttonTela2.setOnClickListener(buttonTelaClick)
     }
 }
 
