@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.dominando.android.basico.models.Cliente
+import br.com.dominando.android.basico.models.Pessoa
 import br.com.dominando.android.basico.ui.theme.BasicoTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,9 +41,17 @@ class MainActivity : ComponentActivity() {
             intent.putExtra("cliente", cliente)
             startActivity(intent)
         }
+
+        val buttonSerializableClick = View.OnClickListener {
+            val intent = Intent(this, Tela2Activity::class.java)
+            intent.putExtra("pessoa", Pessoa(nome = "Barion", idade = 35))
+            startActivity(intent)
+        }
         val button = findViewById<Button>(R.id.buttonToast)
         button.setOnClickListener(buttonClick)
         val buttonParcelable = findViewById<Button>(R.id.buttonParcel)
+        val buttonSerializable = findViewById<Button>(R.id.buttonSerializable)
+        buttonSerializable.setOnClickListener(buttonSerializableClick)
         buttonParcelable.setOnClickListener(buttonParcelClick)
         val buttonTela2 = findViewById<Button>(R.id.buttonTela2)
         buttonTela2.setOnClickListener(buttonTelaClick)
