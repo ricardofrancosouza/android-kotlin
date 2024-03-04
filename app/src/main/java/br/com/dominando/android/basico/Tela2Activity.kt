@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
+import br.com.dominando.android.basico.models.Cliente
 
 class Tela2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +13,12 @@ class Tela2Activity : AppCompatActivity() {
         val textMessage = findViewById<TextView>(R.id.textMensagem)
         val nome = intent.getStringExtra("nome")
         val idade = intent.getIntExtra("idade", -1)
-        textMessage.text = "Nome: $nome / idade: $idade"
+        val cliente = intent.getParcelableExtra<Cliente>("cliente")
+        textMessage.text = if(cliente != null) {
+            "Nome:${cliente.nome} / Codigo: ${cliente.codigo}"
+        }else {
+            "Nome: $nome / idade: $idade"
+        }
+
     }
 }
