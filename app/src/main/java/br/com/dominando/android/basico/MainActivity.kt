@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import br.com.dominando.android.basico.models.Cliente
 import br.com.dominando.android.basico.models.Pessoa
 import br.com.dominando.android.basico.ui.theme.BasicoTheme
+import org.parceler.Parcels
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
         val buttonParcelClick = View.OnClickListener {
             val cliente = Cliente(codigo = 1, nome = "Bruce")
             val intent = Intent(this, Tela2Activity::class.java)
-            intent.putExtra("cliente", cliente)
+            intent.putExtra("cliente", Parcels.wrap(cliente))
             startActivity(intent)
         }
 
@@ -57,6 +58,7 @@ class MainActivity : ComponentActivity() {
         buttonTela2.setOnClickListener(buttonTelaClick)
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
