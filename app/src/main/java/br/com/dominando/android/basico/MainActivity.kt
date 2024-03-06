@@ -2,6 +2,7 @@ package br.com.dominando.android.basico
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +20,7 @@ import org.parceler.Parcels
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("NGVL", "tela1::onCreate")
         setContentView(R.layout.activity_main)
         val editText = findViewById<EditText>(R.id.editTexto)
         val buttonClick = View.OnClickListener {
@@ -57,8 +59,35 @@ class MainActivity : ComponentActivity() {
         val buttonTela2 = findViewById<Button>(R.id.buttonTela2)
         buttonTela2.setOnClickListener(buttonTelaClick)
     }
-}
 
+    override fun onStart(){
+        super.onStart()
+        Log.i("NGVL", "tela1::onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("NGVL","Tela1::onResume")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("NGVL","Tela1::onRestart")
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.i("NGVL","Tela1::onPause")
+    }
+    override fun onStop() {
+        super.onStop()
+        Log.i("NGVL","Tela1::onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("NGVL","Tela1::onDestroy")
+    }
+}
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

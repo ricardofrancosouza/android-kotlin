@@ -3,6 +3,7 @@ package br.com.dominando.android.basico
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import br.com.dominando.android.basico.models.Cliente
@@ -12,6 +13,7 @@ import org.parceler.Parcels
 class Tela2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("NGVL","Tela2::onCreate")
         setContentView(R.layout.activity_tela2)
         val textMessage = findViewById<TextView>(R.id.textMensagem)
         val nome = intent.getStringExtra("nome")
@@ -27,5 +29,33 @@ class Tela2Activity : AppCompatActivity() {
             getString(R.string.tela2_texto2, nome, idade)
         }
 
+    }
+
+    override fun onStart(){
+        super.onStart()
+        Log.i("NGVL", "tela2::onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("NGVL","Tela2::onResume")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("NGVL","Tela2::onRestart")
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.i("NGVL","Tela2::onPause")
+    }
+    override fun onStop() {
+        super.onStop()
+        Log.i("NGVL","Tela2::onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("NGVL","Tela2::onDestroy")
     }
 }
