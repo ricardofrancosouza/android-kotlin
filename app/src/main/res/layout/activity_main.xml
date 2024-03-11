@@ -2,56 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.dominando.android.basico.MainActivity"
-    android:theme="@style/Theme.AppCompat"
+    android:padding="16dp"
     >
-    <Button
-        android:id="@+id/buttonSerializable"
+    <TextView
+        android:id="@+id/txtLabelName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/main_button_serializable"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonParcel"/>
-
-    <Button
-        android:id="@+id/buttonParcel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/main_button_parcel"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTela2"/>
-
-    <EditText
-        android:id="@+id/editTexto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/label_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLabelName"/>
     <Button
-        android:id="@+id/buttonToast"
+        android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_button_toast"
-        app:layout_constraintStart_toStartOf="@id/editTexto"
-        app:layout_constraintTop_toBottomOf="@id/editTexto"/>
-    <Button
-        android:id="@+id/buttonTela2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main_button_tela2"
-        app:layout_constraintStart_toStartOf="@+id/buttonToast"
-        app:layout_constraintTop_toBottomOf="@+id/buttonToast"/>
-
+        android:onClick="btnAddClick"
+        android:text="@string/btn_add"
+        app:layout_constraintBottom_toBottomOf="@+id/edtName"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ListView
+        android:id="@+id/lstNames"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtName"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
