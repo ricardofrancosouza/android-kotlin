@@ -1,24 +1,12 @@
 package br.com.dominando.android.basico
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import br.com.dominando.android.basico.models.Cliente
-import br.com.dominando.android.basico.models.Pessoa
-import br.com.dominando.android.basico.ui.theme.BasicoTheme
-import org.parceler.Parcels
 
 class MainActivity : ComponentActivity() {
 
@@ -27,11 +15,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("NGVL", "tela1::onCreate")
+        if(savedInstanceState != null) {
+            names = savedInstanceState.getStringArrayList("names_list")!!
+        }
         setContentView(R.layout.activity_main)
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, names)
         val lstNames: ListView = findViewById<ListView>(R.id.lstNames)
         lstNames.adapter = adapter
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putStringArrayList("names_list", names)
     }
 
     override fun onStart(){
