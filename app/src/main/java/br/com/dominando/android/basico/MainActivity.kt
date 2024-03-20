@@ -1,63 +1,57 @@
 package br.com.dominando.android.basico
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import br.com.dominando.android.basico.models.Cliente
-import br.com.dominando.android.basico.models.Pessoa
 import br.com.dominando.android.basico.ui.theme.BasicoTheme
-import org.parceler.Parcels
+import br.com.dominando.android.basico.ui.theme.StatesListActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    var state: String? = null
+    lateinit var btnState: Button
+    companion object {
+        private const val REQUEST_STATE = 1
+        private const val EXTRA_STATE = "estado"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("NGVL", "tela1::onCreate")
         setContentView(R.layout.activity_main)
-        val editText = findViewById<EditText>(R.id.editTexto)
         val buttonClick = View.OnClickListener {
-            it.setOnClickListener {
-                val text = editText.text.toString()
-                Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
-            }
-        }
-        val buttonTelaClick = View.OnClickListener {
-            it.setOnClickListener {
-                val intent = Intent(this, Tela2Activity::class.java)
-                intent.putExtra("nome", "Glauber")
-                intent.putExtra("idade", 35)
-                startActivity(intent)
-            }
+            val intent = Intent(this, StatesListActivity::class.java)
+            intent.putExtra(EXTRA_STATE, state)
+            startActivityForResult(intent, REQUEST_STATE)
         }
 
-        val buttonParcelClick = View.OnClickListener {
-            val cliente = Cliente(codigo = 1, nome = "Bruce")
-            val intent = Intent(this, Tela2Activity::class.java)
-            intent.putExtra("cliente", Parcels.wrap(cliente))
-            startActivity(intent)
-        }
+        val btnState = findViewById<Button>(R.id.btnState)
+        btnState.setOnClickListener(buttonClick)
+       if(savedInstanceState != null) {
+           state = savedInstanceState.getString(EXTRA_STATE)
+           if(state != null) {
+               btnState.text = state
+           }
+       }
+    }
 
-        val buttonSerializableClick = View.OnClickListener {
-            val intent = Intent(this, Tela2Activity::class.java)
-            intent.putExtra("pessoa", Pessoa(nome = "Barion", idade = 35))
-            startActivity(intent)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && resultCode == REQUEST_STATE) {
+            state = data?.getStringExtra(EXTRA_STATE)
+            btnState.text = state
         }
-        val button = findViewById<Button>(R.id.buttonToast)
-        button.setOnClickListener(buttonClick)
-        val buttonParcelable = findViewById<Button>(R.id.buttonParcel)
-        val buttonSerializable = findViewById<Button>(R.id.buttonSerializable)
-        buttonSerializable.setOnClickListener(buttonSerializableClick)
-        buttonParcelable.setOnClickListener(buttonParcelClick)
-        val buttonTela2 = findViewById<Button>(R.id.buttonTela2)
-        buttonTela2.setOnClickListener(buttonTelaClick)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle){
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_STATE, state)
     }
 
     override fun onStart(){
