@@ -43,8 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK && resultCode == REQUEST_STATE) {
-            state = data?.getStringExtra(EXTRA_STATE)
+        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_STATE) {
+            state = data?.getStringExtra(StatesListActivity.EXTRA_RESULT)
+            val btnState = findViewById<Button>(R.id.btnState)
             btnState.text = state
         }
     }
