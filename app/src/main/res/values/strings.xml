@@ -6,4 +6,18 @@
     <string name="main_button_serializable">Serializable via Intent</string>
     <string name="tela2_texto1">Nome: %1$s / Código: %2$d</string>
     <string name="tela2_texto2">Nome: %1$s / Idade:%2$d</string>
+    <string-array name="intent_action">
+        <item>Browser</item>
+        <item>Realizando uma chamada</item>
+        <item>Mapa</item>
+        <item>SMS</item>
+        <item>Compartilhar</item>
+        <item>Alarme</item>
+        <item>Buscar na Web</item>
+        <item>Configurações</item>
+        <item>Minha ação 1</item>
+        <item>Minha ação 2</item>
+        <item>Sair</item>
+    </string-array>
+    <string name="error_intent">Ação não suportada.</string>
 </resources>

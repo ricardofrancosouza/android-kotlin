@@ -1,63 +1,84 @@
 package br.com.dominando.android.basico
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import br.com.dominando.android.basico.models.Cliente
-import br.com.dominando.android.basico.models.Pessoa
 import br.com.dominando.android.basico.ui.theme.BasicoTheme
-import org.parceler.Parcels
+import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("NGVL", "tela1::onCreate")
-        setContentView(R.layout.activity_main)
-        val editText = findViewById<EditText>(R.id.editTexto)
-        val buttonClick = View.OnClickListener {
-            it.setOnClickListener {
-                val text = editText.text.toString()
-                Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
+       val listView = ListView(this)
+        setContentView(listView)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, resources.getStringArray(R.array.intent_action))
+        listView.adapter = adapter
+        listView.setOnItemClickListener {_, _, position,_ -> openIntentAPosition(position)}
+    }
+
+    private fun openIntentAPosition(position: Int) {
+        val uri: Uri?
+        val intent: Intent?
+        when(position){
+            0 -> {
+                //Abring uma URL
+                uri = Uri.parse("http://www.nglauber.com.br")
+                intent = Intent(Intent.ACTION_VIEW, uri)
+                openIntent(intent)
+            }
+            1 -> {
+                //Realiza uma chamada
+                uri = Uri.parse("tel:999887766")
+                intent = Intent(Intent.ACTION_DIAL, uri)
+                openIntent(intent)
+            }
+            2 -> {
+                //Pesquisa uma posição do mapa
+                //seu emulador/aparelho deve ter o Google Maps
+                uri = Uri.parse("geo:0,0?q=Rua+Amelia, Recife")
+                intent = Intent(Intent.ACTION_VIEW, uri)
+                openIntent(intent)
+            }
+            3 -> {
+                //Abrindo o editor de SMS
+                uri = Uri.parse("sms:12345")
+                intent = Intent(Intent.ACTION_SEND, uri)
+                    .putExtra("sms_body", "Corpo do SMS")
+                openIntent(intent)
+            }
+            4 -> {
+                //Compartilhar
+                intent = Intent()
+                    .setAction(Intent.ACTION_SEND)
+                    .putExtra(Intent.EXTRA_TEXT, "Compartilhando via intent")
+                    .setType("text/plain")
+                openIntent(intent)
+            }
+            5 -> {
+                //Alarme
+                intent = Intent(AlarmClock.ACTION_SET_ALARM)
+                    .putExtra(AlarmClock.EXTRA_MESSAGE, "Estudar Android")
+                    .putExtra(AlarmClock.EXTRA_HOUR, 19)
+                    .putExtra(AlarmClock.EXTRA_MINUTES, 0)
+                    .putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+                    .putExtra(AlarmClock.EXTRA_DAYS, arrayListOf(
+                        Calendar.MONDAY,
+                        Calendar.WEDNESDAY,
+                        Calendar.FRIDAY
+                    ))
+                openIntent(intent)
             }
         }
-        val buttonTelaClick = View.OnClickListener {
-            it.setOnClickListener {
-                val intent = Intent(this, Tela2Activity::class.java)
-                intent.putExtra("nome", "Glauber")
-                intent.putExtra("idade", 35)
-                startActivity(intent)
-            }
-        }
-
-        val buttonParcelClick = View.OnClickListener {
-            val cliente = Cliente(codigo = 1, nome = "Bruce")
-            val intent = Intent(this, Tela2Activity::class.java)
-            intent.putExtra("cliente", Parcels.wrap(cliente))
-            startActivity(intent)
-        }
-
-        val buttonSerializableClick = View.OnClickListener {
-            val intent = Intent(this, Tela2Activity::class.java)
-            intent.putExtra("pessoa", Pessoa(nome = "Barion", idade = 35))
-            startActivity(intent)
-        }
-        val button = findViewById<Button>(R.id.buttonToast)
-        button.setOnClickListener(buttonClick)
-        val buttonParcelable = findViewById<Button>(R.id.buttonParcel)
-        val buttonSerializable = findViewById<Button>(R.id.buttonSerializable)
-        buttonSerializable.setOnClickListener(buttonSerializableClick)
-        buttonParcelable.setOnClickListener(buttonParcelClick)
-        val buttonTela2 = findViewById<Button>(R.id.buttonTela2)
-        buttonTela2.setOnClickListener(buttonTelaClick)
     }
 
     override fun onStart(){
