@@ -1,12 +1,15 @@
 package br.com.dominando.android.basico
 
+import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.AlarmClock
+import android.provider.Settings
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -78,6 +81,35 @@ class MainActivity : ComponentActivity() {
                     ))
                 openIntent(intent)
             }
+            6-> {
+                //Busca na web
+                intent = Intent(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY,"Navatec")
+                openIntent(intent)
+            }
+            7->{
+                //Configurações do aprelho
+                intent = Intent(Settings.ACTION_SETTINGS)
+                openIntent(intent)
+            }
+            8-> {
+                //Ação customizada1
+                intent = Intent("dominando.android.CUSTOM_ACTION")
+                openIntent(intent)
+            }
+            9-> {
+                //Ação customizada 2
+                uri = Uri.parse("produto://Notebook/Slim")
+                intent = Intent(Intent.ACTION_VIEW, uri)
+                openIntent(intent)
+            }
+            else -> finish()
+        }
+    }
+    private fun openIntent(intent: Intent) {
+        if(intent.resolveActivity(packageManager)!=null){
+            startActivity(intent)
+        }else {
+            Toast.makeText(this, R.string.error_intent, Toast.LENGTH_SHORT).show()
         }
     }
 
