@@ -1,0 +1,21 @@
+package br.com.dominando.android.basico
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+
+class ActionActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_action)
+        val txtAction = findViewById<TextView>(R.id.textAction)
+        if(intent.action == Intent.ACTION_VIEW) {
+            val uri = intent.data
+
+            txtAction.text = getString(R.string.custom_action2, uri.toString(),uri?.host, uri?.path)
+        }else if(intent.action == "dominando.android.CUSTOM_ACTION"){
+            txtAction.text = getString(R.string.custom_action1)
+        }
+    }
+}

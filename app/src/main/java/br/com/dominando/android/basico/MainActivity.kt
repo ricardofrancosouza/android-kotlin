@@ -2,6 +2,7 @@ package br.com.dominando.android.basico
 
 import android.app.SearchManager
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.AlarmClock
@@ -105,11 +106,27 @@ class MainActivity : ComponentActivity() {
             else -> finish()
         }
     }
+    private fun callNumber() {
+        val uri = Uri.parse("tel:999887766")
+        val intent = Intent(Intent.ACTION_CALL, uri)
+        openIntent(intent)
+    }
     private fun openIntent(intent: Intent) {
         if(intent.resolveActivity(packageManager)!=null){
             startActivity(intent)
         }else {
             Toast.makeText(this, R.string.error_intent, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(grantResults.first() == PackageManager.PERMISSION_GRANTED){
+            callNumber()
         }
     }
 
