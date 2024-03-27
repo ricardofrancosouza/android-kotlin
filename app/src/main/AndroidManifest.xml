@@ -10,12 +10,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         tools:targetApi="31">
+        <activity
+            android:name=".ActivityQueSeraChamada"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="glauber"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Tela2Activity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight"/>
+            android:theme="@style/Theme.AppCompat.DayNight" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
